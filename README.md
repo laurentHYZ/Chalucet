@@ -6,6 +6,7 @@ Page de présentation de la médiathèque Chalucet (Toulon) : un lieu culturel i
 
 - `index.html` — page unique, autonome (HTML + CSS + JS, aucune dépendance hors Google Fonts)
 - `img/` — photographies optimisées
+- `dev-environment-guide.md` — guide de mise en place de l'environnement de développement
 
 ## Voir la page
 
