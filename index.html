@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Médiathèque Chalucet — Toulon</title>
+<meta name="description" content="La médiathèque Chalucet, troisième lieu culturel au cœur de Toulon : 4 800 m², un patrimoine hospitalier réinventé par Corinne Vezzoni, un jardin de 20 000 m², des collections et des espaces pour tous.">
+<meta name="theme-color" content="#f6f2ea">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f6f2ea;
+    --paper-2:#efe8da;
+    --ink:#191814;
+    --ink-soft:#4c473c;
+    --terra:#a84e2c;
+    --terra-soft:#c2764f;
+    --olive:#5c6a4e;
+    --gold:#c2a163;
+    --line:rgba(25,24,20,.16);
+    --serif:"Fraunces",Georgia,"Times New Roman",serif;
+    --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    --ease:cubic-bezier(.22,.68,.16,1);
+    --pad:clamp(1.25rem,5vw,6rem);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:var(--sans);font-size:17px;line-height:1.65;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  img{max-width:100%;display:block}
+  a{color:inherit}
+  ::selection{background:var(--terra);color:#fff}
+
+  .skip{position:absolute;left:-9999px;top:0;background:var(--ink);color:var(--paper);padding:.8rem 1.2rem;z-index:999}
+  .skip:focus{left:1rem;top:1rem}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:fixed;inset:0 0 auto 0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:1.1rem var(--pad);
+    transition:background .5s var(--ease), padding .5s var(--ease), box-shadow .5s var(--ease), color .4s;
+    color:#fff;
+  }
+  .nav.solid{
+    background:rgba(246,242,234,.92);
+    -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+    color:var(--ink);
+    padding:.7rem var(--pad);
+    box-shadow:0 1px 0 var(--line);
+  }
+  .brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;letter-spacing:.02em}
+  .brand .mark{
+    width:34px;height:34px;border:1px solid currentColor;border-radius:50%;
+    display:grid;place-items:center;font-family:var(--serif);font-size:.82rem;
+    letter-spacing:.04em;flex:none;
+  }
+  .brand span{font-family:var(--serif);font-size:1.02rem;font-weight:500}
+  .nav ul{display:flex;gap:2rem;list-style:none;margin:0;padding:0}
+  .nav a.lnk{
+    text-decoration:none;font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;
+    font-weight:500;opacity:.85;position:relative;padding-bottom:4px;transition:opacity .3s
+  }
+  .nav a.lnk::after{
+    content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:currentColor;
+    transition:width .45s var(--ease)
+  }
+  .nav a.lnk:hover::after,.nav a.lnk.active::after{width:100%}
+  .nav a.lnk.active{opacity:1}
+  .nav-toggle{display:none;background:none;border:0;color:inherit;font:inherit;letter-spacing:.16em;font-size:.7rem;text-transform:uppercase;cursor:pointer;padding:.4rem}
+  .progress{position:fixed;top:0;left:0;height:2px;width:0;background:var(--terra);z-index:101;transition:width .1s linear}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;min-height:100svh;display:flex;align-items:flex-end;
+    color:#fff;overflow:hidden;isolation:isolate;
+  }
+  .hero .bg{
+    position:absolute;inset:-8% 0;z-index:-2;
+    background:url("img/ext-2.jpg") center 55%/cover no-repeat;
+    will-change:transform;
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;z-index:-1;
+    background:
+      linear-gradient(180deg,rgba(10,12,16,.55) 0%,rgba(10,12,16,.08) 32%,rgba(10,12,16,.12) 55%,rgba(10,12,16,.78) 100%),
+      linear-gradient(90deg,rgba(10,12,16,.62) 0%,rgba(10,12,16,.28) 42%,transparent 72%);
+  }
+  .hero-inner{padding:0 var(--pad) clamp(2.5rem,6vh,5rem);width:100%;max-width:1500px;margin:0 auto}
+  .eyebrow{
+    display:flex;align-items:center;gap:.9rem;margin:0 0 1.6rem;
+    font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;font-weight:500;
+  }
+  .eyebrow::before{content:"";width:44px;height:1px;background:currentColor;opacity:.7}
+  .hero h1{
+    font-family:var(--serif);font-weight:300;margin:0;
+    font-size:clamp(3.2rem,10.5vw,9rem);line-height:.92;letter-spacing:-.03em;
+    text-wrap:balance;
+  }
+  .hero h1 em{font-style:italic;font-weight:300;letter-spacing:-.02em}
+  .hero .lede{
+    max-width:46ch;margin:1.6rem 0 0;font-size:clamp(.95rem,1.5vw,1.12rem);
+    font-weight:300;line-height:1.7;color:rgba(255,255,255,.9)
+  }
+  .hero-foot{
+    display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;
+    gap:1.5rem;margin-top:clamp(2rem,6vh,4rem);
+    border-top:1px solid rgba(255,255,255,.28);padding-top:1.3rem;
+  }
+  .hero-foot .tag{
+    display:flex;align-items:center;gap:.55rem;font-size:.72rem;letter-spacing:.14em;
+    text-transform:uppercase;color:rgba(255,255,255,.82)
+  }
+  .dot{width:6px;height:6px;border-radius:50%;background:#8fbf7f;box-shadow:0 0 0 4px rgba(143,191,127,.22)}
+  .scroll-cue{
+    display:flex;align-items:center;gap:.7rem;text-decoration:none;
+    font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.85)
+  }
+  .scroll-cue i{display:block;width:1px;height:38px;background:rgba(255,255,255,.5);position:relative;overflow:hidden}
+  .scroll-cue i::after{content:"";position:absolute;inset:0;background:#fff;animation:cue 2.2s var(--ease) infinite}
+  @keyframes cue{0%{transform:translateY(-100%)}60%,100%{transform:translateY(100%)}}
+
+  /* ---------- SHARED ---------- */
+  section{position:relative}
+  .wrap{max-width:1280px;margin:0 auto;padding:clamp(4.5rem,10vw,9rem) var(--pad)}
+  .label{
+    display:flex;align-items:center;gap:.85rem;margin:0 0 1.5rem;
+    font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;
+    color:var(--terra);font-weight:600
+  }
+  .label::before{content:"";width:30px;height:1px;background:currentColor;opacity:.6}
+  h2{
+    font-family:var(--serif);font-weight:300;letter-spacing:-.02em;
+    font-size:clamp(2.1rem,4.6vw,3.9rem);line-height:1.03;margin:0 0 1.4rem;text-wrap:balance
+  }
+  h2 em{font-style:italic;color:var(--terra)}
+  .body{font-size:1.02rem;line-height:1.8;color:var(--ink-soft);max-width:60ch}
+  .body p{margin:0 0 1.1rem}
+  .body strong{color:var(--ink);font-weight:500}
+  .drop::first-letter{
+    font-family:var(--serif);float:left;font-size:3.6em;line-height:.78;
+    padding:.09em .12em 0 0;color:var(--terra);font-weight:400
+  }
+  .btn{
+    display:inline-flex;align-items:center;gap:.7rem;text-decoration:none;
+    font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;
+    padding:.95rem 1.5rem;border:1px solid var(--ink);border-radius:100px;
+    transition:background .4s var(--ease),color .4s var(--ease),gap .4s var(--ease)
+  }
+  .btn:hover{background:var(--ink);color:var(--paper);gap:1.1rem}
+  .btn.light{border-color:rgba(255,255,255,.45);color:#fff}
+  .btn.light:hover{background:#fff;color:var(--ink)}
+  .arrow{font-family:var(--sans)}
+
+  /* reveal */
+  .js .reveal{opacity:0;transform:translateY(26px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+  .js .reveal.in{opacity:1;transform:none}
+  .js .reveal.d1{transition-delay:.08s}.js .reveal.d2{transition-delay:.16s}.js .reveal.d3{transition-delay:.24s}.js .reveal.d4{transition-delay:.32s}
+
+  /* ---------- INTRO ---------- */
+  .intro{background:var(--paper)}
+  .intro-grid{
+    display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2.5rem,7vw,6.5rem);align-items:center
+  }
+  .intro-quote{
+    font-family:var(--serif);font-style:italic;font-weight:300;
+    font-size:clamp(1.35rem,2.4vw,1.85rem);line-height:1.42;color:var(--ink);
+    margin:2.2rem 0 0;padding-left:1.4rem;border-left:1px solid var(--terra)
+  }
+  .intro-quote footer{
+    font-family:var(--sans);font-style:normal;font-size:.68rem;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--ink-soft);margin-top:1rem
+  }
+  .intro-media{position:relative}
+  .intro-media .frame{
+    overflow:hidden;border-radius:2px;aspect-ratio:4/5;background:var(--paper-2)
+  }
+  .intro-media img{width:100%;height:100%;object-fit:cover;transform:scale(1.02);transition:transform 1.4s var(--ease)}
+  .intro-media:hover img{transform:scale(1.06)}
+  .intro-media .cap{
+    position:absolute;right:-1px;bottom:-1px;background:var(--paper);
+    padding:.85rem 1.1rem;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);
+    max-width:70%;line-height:1.6
+  }
+  .pillars{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;
+    margin-top:clamp(3rem,7vw,5rem);border-top:1px solid var(--line);padding-top:2.4rem
+  }
+  .pillar h3{font-family:var(--serif);font-weight:400;font-size:1.15rem;margin:0 0 .5rem}
+  .pillar p{margin:0;font-size:.9rem;color:var(--ink-soft);line-height:1.7}
+  .pillar .n{font-size:.62rem;letter-spacing:.2em;color:var(--terra);display:block;margin-bottom:.7rem}
+
+  /* ---------- STATS ---------- */
+  .stats{background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .stats .row{
+    max-width:1280px;margin:0 auto;padding:clamp(2.5rem,5vw,3.6rem) var(--pad);
+    display:grid;grid-template-columns:repeat(4,1fr);gap:2rem
+  }
+  .stat{border-left:1px solid var(--line);padding-left:1.4rem}
+  .stat:first-child{border-left:0;padding-left:0}
+  .stat .num{
+    font-family:var(--serif);font-weight:300;font-size:clamp(2.1rem,4vw,3.2rem);
+    line-height:1;letter-spacing:-.02em;display:flex;align-items:baseline;gap:.15rem
+  }
+  .stat .num small{font-size:.42em;letter-spacing:0;color:var(--ink-soft);font-family:var(--sans);font-weight:400}
+  .stat .lbl{font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin-top:.7rem}
+
+  /* ---------- ARCHITECTURE (dark) ---------- */
+  .arch{background:var(--ink);color:#efe9dd}
+  .arch .label{color:var(--gold)}
+  .arch h2 em{color:var(--gold)}
+  .arch .body{color:rgba(239,233,221,.72)}
+  .arch .body strong{color:#fff;font-weight:500}
+  .arch-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2.5rem,6vw,5.5rem);align-items:center}
+  .arch-media{position:relative}
+  .arch-media .frame{overflow:hidden;aspect-ratio:16/11;background:#2a2822}
+  .arch-media img{width:100%;height:100%;object-fit:cover;filter:saturate(.92)}
+  .arch-media .stamp{
+    position:absolute;left:-1.1rem;bottom:-1.1rem;background:var(--terra);color:#fff;
+    padding:1rem 1.2rem;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;line-height:1.7
+  }
+  .arch-media .stamp b{display:block;font-family:var(--serif);font-size:1.25rem;letter-spacing:.02em;text-transform:none;font-weight:400}
+  .timeline{margin:2.6rem 0 0;padding:0;list-style:none;border-top:1px solid rgba(239,233,221,.18)}
+  .timeline li{
+    display:grid;grid-template-columns:5.2rem 1fr;gap:1rem;padding:1rem 0;
+    border-bottom:1px solid rgba(239,233,221,.13);font-size:.88rem;color:rgba(239,233,221,.7)
+  }
+  .timeline .yr{font-family:var(--serif);font-size:1.02rem;color:var(--gold);letter-spacing:.02em}
+
+  /* ---------- ESPACES ---------- */
+  .spaces{background:var(--paper)}
+  .spaces-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:1.5rem;margin-bottom:2.6rem}
+  .tabs{display:flex;flex-wrap:wrap;gap:.5rem}
+  .tab{
+    background:none;border:1px solid var(--line);border-radius:100px;cursor:pointer;
+    font:inherit;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+    padding:.62rem 1.05rem;color:var(--ink-soft);transition:.35s var(--ease)
+  }
+  .tab:hover{border-color:var(--ink);color:var(--ink)}
+  .tab[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+  .panel{display:none;grid-template-columns:1.15fr .85fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+  .panel.on{display:grid;animation:fade .55s var(--ease)}
+  @keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  .panel h3{font-family:var(--serif);font-weight:300;font-size:clamp(1.7rem,3vw,2.5rem);margin:0 0 .9rem;line-height:1.1}
+  .panel p{margin:0 0 1.4rem;color:var(--ink-soft);line-height:1.8;max-width:55ch}
+  .chips{display:flex;flex-wrap:wrap;gap:.45rem;list-style:none;padding:0;margin:0}
+  .chips li{
+    font-size:.72rem;letter-spacing:.06em;padding:.45rem .85rem;border-radius:100px;
+    background:rgba(25,24,20,.055);color:var(--ink-soft)
+  }
+  .panel .pic{overflow:hidden;aspect-ratio:5/4;background:var(--paper-2)}
+  .panel .pic img{width:100%;height:100%;object-fit:cover}
+  .panel .note{
+    margin-top:1.6rem;font-size:.75rem;color:var(--ink-soft);
+    display:flex;gap:.6rem;align-items:flex-start;line-height:1.6
+  }
+  .panel .note::before{content:"✦";color:var(--terra);font-size:.85rem;line-height:1.4}
+
+  /* ---------- GALLERY ---------- */
+  .gallery{padding:0 var(--pad) clamp(4rem,8vw,7rem);max-width:1500px;margin:0 auto}
+  .gal-grid{display:grid;grid-template-columns:1.4fr .8fr;gap:clamp(.8rem,2vw,1.4rem)}
+  .gal-grid figure{margin:0;overflow:hidden;position:relative}
+  .gal-grid img{width:100%;height:100%;object-fit:cover;transition:transform 1.6s var(--ease)}
+  .gal-grid figure:hover img{transform:scale(1.04)}
+  .gal-grid .a{aspect-ratio:16/10}
+  .gal-grid .b{aspect-ratio:4/5}
+  .gal-grid figcaption{
+    position:absolute;left:0;bottom:0;right:0;padding:1.6rem 1.2rem .9rem;
+    font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:#fff;
+    background:linear-gradient(transparent,rgba(10,10,8,.65))
+  }
+
+  /* ---------- PRACTICAL ---------- */
+  .practical{background:var(--paper-2);border-top:1px solid var(--line)}
+  .prac-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(2.5rem,7vw,6rem)}
+  .hours{list-style:none;margin:1.8rem 0 0;padding:0;border-top:1px solid var(--line)}
+  .hours li{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:.92rem .4rem;border-bottom:1px solid var(--line);font-size:.93rem;
+    transition:background .3s
+  }
+  .hours li.today{background:rgba(168,78,44,.07);box-shadow:inset 2px 0 0 var(--terra);padding-left:1rem}
+  .hours li.today .d::after{
+    content:" · aujourd’hui";font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--terra)
+  }
+  .hours .d{letter-spacing:.02em}
+  .hours .h{font-variant-numeric:tabular-nums;color:var(--ink-soft)}
+  .hours li.closed .h{color:var(--terra)}
+  .card{
+    background:var(--paper);border:1px solid var(--line);padding:clamp(1.6rem,4vw,2.6rem);
+    position:relative;overflow:hidden
+  }
+  .card::before{
+    content:"";position:absolute;top:0;right:0;width:120px;height:120px;
+    background:radial-gradient(circle at 100% 0,rgba(194,161,99,.22),transparent 70%)
+  }
+  .info-block{margin-bottom:1.6rem}
+  .info-block:last-child{margin-bottom:0}
+  .info-block .k{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--terra);margin-bottom:.35rem}
+  .info-block .v{font-family:var(--serif);font-size:1.18rem;line-height:1.5}
+  .info-block .v a{text-decoration:none;border-bottom:1px solid var(--line)}
+  .info-block .v a:hover{border-color:var(--terra);color:var(--terra)}
+  .info-block .s{font-size:.82rem;color:var(--ink-soft);margin-top:.2rem;line-height:1.6}
+  .actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2rem}
+
+  /* ---------- FOOTER ---------- */
+  footer.site{background:var(--ink);color:rgba(239,233,221,.66);padding:clamp(3rem,7vw,4.5rem) var(--pad) 2rem}
+  .foot-top{
+    max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;
+    gap:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(239,233,221,.14)
+  }
+  .foot-brand{font-family:var(--serif);font-size:1.9rem;font-weight:300;color:#fff;line-height:1.1;letter-spacing:-.01em}
+  .foot-brand span{display:block;font-family:var(--sans);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-top:.8rem}
+  .foot-links{display:flex;flex-wrap:wrap;gap:3rem}
+  .foot-links div{display:flex;flex-direction:column;gap:.55rem}
+  .foot-links a{font-size:.78rem;text-decoration:none;color:rgba(239,233,221,.66);transition:color .3s}
+  .foot-links a:hover{color:#fff}
+  .foot-links .t{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.25rem}
+  .foot-bottom{
+    max-width:1280px;margin:0 auto;padding-top:1.6rem;display:flex;flex-wrap:wrap;
+    justify-content:space-between;gap:1rem;font-size:.66rem;letter-spacing:.04em;line-height:1.8
+  }
+  .foot-bottom .credits{max-width:60ch}
+
+  /* ---------- TO TOP ---------- */
+  .top{
+    position:fixed;right:1.2rem;bottom:1.2rem;width:44px;height:44px;border-radius:50%;
+    background:var(--ink);color:var(--paper);border:0;display:grid;place-items:center;
+    cursor:pointer;opacity:0;pointer-events:none;transition:.4s var(--ease);z-index:90;
+    font-size:.9rem
+  }
+  .top.show{opacity:1;pointer-events:auto}
+  .top:hover{background:var(--terra)}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:960px){
+    .intro-grid,.arch-grid,.prac-grid{grid-template-columns:1fr}
+    .intro-media{order:-1}
+    .intro-media .frame{aspect-ratio:16/11}
+    .pillars{grid-template-columns:1fr;gap:1.2rem}
+    .pillar{border-top:1px solid var(--line);padding-top:1.1rem}
+    .stats .row{grid-template-columns:repeat(2,1fr);gap:1.8rem}
+    .stat:nth-child(3){border-left:0;padding-left:0}
+    .panel{grid-template-columns:1fr}
+    .panel .pic{order:-1;aspect-ratio:16/10}
+    .gal-grid{grid-template-columns:1fr}
+    .gal-grid .b{aspect-ratio:16/10}
+    .arch-media .stamp{left:0;bottom:0}
+  }
+  @media(max-width:760px){
+    body{font-size:16px}
+    .nav ul{
+      position:absolute;top:100%;left:0;right:0;background:var(--paper);
+      flex-direction:column;gap:0;padding:0 1.4rem;max-height:0;overflow:hidden;
+      transition:max-height .5s var(--ease);box-shadow:0 20px 30px rgba(0,0,0,.08)
+    }
+    .nav ul.open{max-height:340px;padding:1rem 1.4rem 1.4rem}
+    .nav ul li a.lnk{color:var(--ink);display:block;padding:.8rem 0;font-size:.78rem}
+    .nav-toggle{display:block}
+    .hero h1{font-size:clamp(2.9rem,14vw,4.6rem)}
+    .hero-foot{flex-direction:column;align-items:flex-start;gap:1.2rem}
+    .stats .row{grid-template-columns:1fr 1fr}
+    .stat .num{font-size:2rem}
+    .foot-links{gap:2rem}
+  }
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+    .js .reveal{opacity:1;transform:none}
+    .hero .bg{transform:none!important}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Aller au contenu</a>
+<div class="progress" id="progress"></div>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#top" aria-label="Médiathèque Chalucet, accueil">
+    <span class="mark">MC</span>
+    <span>Chalucet</span>
+  </a>
+  <nav aria-label="Navigation principale">
+    <ul id="menu">
+      <li><a class="lnk" href="#lieu">Le lieu</a></li>
+      <li><a class="lnk" href="#architecture">Architecture</a></li>
+      <li><a class="lnk" href="#espaces">Espaces</a></li>
+      <li><a class="lnk" href="#pratique">Pratique</a></li>
+    </ul>
+  </nav>
+  <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="menu">Menu</button>
+</header>
+
+<main id="main">
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="bg" id="heroBg" role="img" aria-label="La médiathèque Chalucet au crépuscule, entre la façade contemporaine en béton blanc et la chapelle néoclassique"></div>
+    <div class="hero-inner">
+      <p class="eyebrow">Toulon · Quartier de la Créativité et de la Connaissance</p>
+      <h1>Médiathèque<br><em>Chalucet</em></h1>
+      <p class="lede">Un troisième lieu au cœur de la ville, où le patrimoine hospitalier rencontre l’architecture contemporaine — et où l’on vient autant pour lire que pour rester.</p>
+      <div class="hero-foot">
+        <p class="tag"><span class="dot"></span> Ouverte depuis janvier 2020 · 5 rue Chalucet</p>
+        <a class="scroll-cue" href="#lieu">Découvrir <i aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="intro" id="lieu">
+    <div class="wrap">
+      <div class="intro-grid">
+        <div class="reveal">
+          <p class="label">Le lieu</p>
+          <h2>Une bibliothèque<br>qui se traverse<br><em>comme une ville</em></h2>
+          <div class="body drop">
+            <p>Sur les hauteurs du centre-ville, là où se dressait autrefois l’hôpital de la Charité, la médiathèque Chalucet occupe une ancienne friche hospitalière de 3,5 hectares devenue l’un des quartiers les plus vivants de Toulon.</p>
+            <p>Autour d’elle : l’École supérieure d’art et de design, Kedge Business School, l’école Camondo, un incubateur numérique, des logements, des bureaux — et le jardin Alexandre&nbsp;1<sup>er</sup>, poumon vert de 20&nbsp;000&nbsp;m². La médiathèque est le point de rencontre de tout cela.</p>
+            <p>Conçue comme un <strong>third place</strong> à la française, elle ne se limite pas au prêt de documents : on y travaille, on y joue, on y regarde des films, on y écoute des conférences, on y boit un café face aux arbres.</p>
+          </div>
+          <blockquote class="intro-quote">
+            « Un lieu où l’on entre pour un livre et où l’on reste pour l’atmosphère. »
+            <footer>— L’esprit du troisième lieu</footer>
+          </blockquote>
+        </div>
+        <div class="intro-media reveal d2">
+          <div class="frame">
+            <img src="img/ext-3.jpg" alt="Atrium intérieur de la médiathèque : verrières, passerelles, bois clair et suspensions blanches">
+          </div>
+          <p class="cap">L’atrium · un puits de lumière traversant les trois niveaux</p>
+        </div>
+      </div>
+
+      <div class="pillars reveal">
+        <div class="pillar">
+          <span class="n">01</span>
+          <h3>Lire &amp; emprunter</h3>
+          <p>Livres, bandes dessinées, revues, CD et DVD pour tous les âges, en accès libre et empruntables.</p>
+        </div>
+        <div class="pillar">
+          <span class="n">02</span>
+          <h3>Faire &amp; apprendre</h3>
+          <p>Autoformation, ateliers numériques, jeux vidéo, jeux de société, projections et conférences.</p>
+        </div>
+        <div class="pillar">
+          <span class="n">03</span>
+          <h3>Se retrouver</h3>
+          <p>Un café culturel ouvert sur le jardin, une bulle du conte, un auditorium, une chapelle d’exposition.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats" aria-label="La médiathèque en chiffres">
+    <div class="row">
+      <div class="stat reveal">
+        <div class="num"><span class="count" data-to="4800" data-sep=" ">0</span><small>m²</small></div>
+        <div class="lbl">De surface sur trois niveaux</div>
+      </div>
+      <div class="stat reveal d1">
+        <div class="num"><span class="count" data-to="3">0</span></div>
+        <div class="lbl">Niveaux + un auditorium</div>
+      </div>
+      <div class="stat reveal d2">
+        <div class="num"><span class="count" data-to="20000" data-sep=" ">0</span><small>m²</small></div>
+        <div class="lbl">De jardin Alexandre 1<sup>er</sup></div>
+      </div>
+      <div class="stat reveal d3">
+        <div class="num"><span class="count" data-to="2020">0</span></div>
+        <div class="lbl">Année d’ouverture au public</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURE -->
+  <section class="arch" id="architecture">
+    <div class="wrap">
+      <div class="arch-grid">
+        <div class="arch-media reveal">
+          <div class="frame">
+            <img src="img/chapelle.jpg" alt="Façade néoclassique reconstituée de la médiathèque, en béton blanc, en symétrie avec l’aile historique">
+          </div>
+          <div class="stamp"><b>Corinne Vezzoni</b> &amp; associés<br>Architecte · 2020</div>
+        </div>
+        <div class="reveal d2">
+          <p class="label">Architecture</p>
+          <h2>Le neuf épouse<br><em>l’ancien</em></h2>
+          <div class="body">
+            <p>Trois bâtiments sont inscrits à l’inventaire des monuments historiques : la <strong>chapelle</strong> et le pavillon d’entrée du XIX<sup>e</sup> siècle, ainsi que l’<strong>aile Est</strong> de l’ancien hospice, élevée au XVII<sup>e</sup>.</p>
+            <p>Plutôt que de les isoler, le projet les remet au centre. Une aile neuve en <strong>béton blanc</strong> vient reconstituer la symétrie perdue — l’aile ouest ayant été détruite pendant la Seconde Guerre mondiale — et prolonge l’ordonnancement néoclassique dans une écriture résolument contemporaine.</p>
+            <p>D’un côté, la mémoire : pierre, chapelle, jardin historique. De l’autre, le mouvement : grandes baies, transparence, lumière méditerranéenne.</p>
+          </div>
+          <ul class="timeline">
+            <li><span class="yr">XVII<sup>e</sup></span><span>Hôpital de la Charité, puis hospice Chalucet</span></li>
+            <li><span class="yr">1854</span><span>Agrandissement et transformation en hôpital Chalucet</span></li>
+            <li><span class="yr">1944</span><span>Destruction de l’aile ouest lors des bombardements</span></li>
+            <li><span class="yr">2015</span><span>Concours d’urbanisme sur la friche de 3,5 ha</span></li>
+            <li><span class="yr">2020</span><span>Ouverture de la médiathèque au public</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESPACES -->
+  <section class="spaces" id="espaces">
+    <div class="wrap">
+      <div class="spaces-head">
+        <div class="reveal">
+          <p class="label">Les espaces</p>
+          <h2>Quatre niveaux,<br>mille façons <em>d’y être</em></h2>
+        </div>
+        <div class="tabs reveal d2" role="tablist" aria-label="Niveaux de la médiathèque">
+          <button class="tab" role="tab" aria-selected="false" aria-controls="p0" id="t0">Sous-sol</button>
+          <button class="tab" role="tab" aria-selected="true" aria-controls="p1" id="t1">Rez-de-chaussée</button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="p2" id="t2">1<sup>er</sup> étage</button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="p3" id="t3">2<sup>e</sup> étage</button>
+        </div>
+      </div>
+
+      <div class="panel" id="p0" role="tabpanel" aria-labelledby="t0">
+        <div>
+          <h3>Le sous-sol</h3>
+          <p>L’étage de la parole et du spectacle. Un auditorium accueille conférences, rencontres et projections, complété par un espace événementiel modulable.</p>
+          <ul class="chips"><li>Auditorium</li><li>Espace événementiel</li><li>Conférences</li><li>Rencontres</li></ul>
+        </div>
+        <div class="pic"><img src="img/int-1.jpg" alt="La bulle de lecture, cocon en bois garni de coussins, dans l’espace jeunesse"></div>
+      </div>
+
+      <div class="panel on" id="p1" role="tabpanel" aria-labelledby="t1">
+        <div>
+          <h3>Le rez-de-chaussée</h3>
+          <p>Le seuil, la lumière, la vie du quartier. On y trouve l’accueil et les actualités, un café culturel ouvert sur le jardin, l’espace petite enfance et les pratiques culturelles amateurs.</p>
+          <p>La chapelle restaurée devient l’espace d’exposition : un écrin de pierre pour les regards et les images.</p>
+          <ul class="chips"><li>Accueil &amp; actualités</li><li>Café culturel</li><li>Petite enfance</li><li>Pratiques amateurs</li><li>Chapelle · expositions</li></ul>
+          <p class="note">Le café culturel propose boissons et petite restauration, à consommer sur place ou en terrasse face au jardin.</p>
+        </div>
+        <div class="pic"><img src="img/int-2.jpg" alt="Espace de lecture confortable : fauteuils enveloppants, long comptoir en bois le long des fenêtres et suspensions blanches"></div>
+      </div>
+
+      <div class="panel" id="p2" role="tabpanel" aria-labelledby="t2">
+        <div>
+          <h3>Le premier étage</h3>
+          <p>Le royaume des histoires. Bandes dessinées, DVD, romans et fiction, arts : les collections se déploient en libre accès, entre rayonnages et assises improvisées.</p>
+          <ul class="chips"><li>Bande dessinée</li><li>Cinéma · DVD</li><li>Romans &amp; fiction</li><li>Arts</li><li>Revues</li></ul>
+        </div>
+        <div class="pic"><img src="img/ext-3.jpg" alt="Vue de l’atrium et des passerelles desservant les espaces de collections"></div>
+      </div>
+
+      <div class="panel" id="p3" role="tabpanel" aria-labelledby="t3">
+        <div>
+          <h3>Le deuxième étage</h3>
+          <p>L’étage des écrans et des apprentissages : salle d’autoformation équipée de douze postes, espace jeux vidéo, Cinérama pour visionner des films, et les espaces de la médiathèque départementale du Var.</p>
+          <ul class="chips"><li>Autoformation · 12 postes</li><li>Jeux vidéo</li><li>Cinérama</li><li>Jeux de société</li><li>Formation professionnelle</li></ul>
+          <p class="note">Ordinateurs en libre accès répartis sur tous les niveaux pour consulter le catalogue, le site des médiathèques ou naviguer sur Internet.</p>
+        </div>
+        <div class="pic"><img src="img/ext-1.jpg" alt="Espace intérieur de la médiathèque, jeux de lumière et mobilier de lecture"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <div class="gallery reveal">
+    <div class="gal-grid">
+      <figure class="a">
+        <img src="img/ext-2.jpg" alt="Parvis de la médiathèque au crépuscule, la façade contemporaine face à la chapelle éclairée">
+        <figcaption>Le parvis, à l’heure bleue · © Lisa Ricciotti</figcaption>
+      </figure>
+      <figure class="b">
+        <img src="img/int-2.jpg" alt="Salle de lecture et ses fauteuils enveloppants le long des baies vitrées">
+        <figcaption>Lire, travailler, ne rien faire · © D. Huguenin</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <!-- PRATIQUE -->
+  <section class="practical" id="pratique">
+    <div class="wrap">
+      <div class="prac-grid">
+        <div class="reveal">
+          <p class="label">Informations pratiques</p>
+          <h2>Venir,<br>revenir, <em>rester</em></h2>
+          <div class="body">
+            <p>L’entrée est libre et gratuite. L’emprunt de documents est ouvert à tous les inscrits du réseau des médiathèques de Toulon.</p>
+          </div>
+          <ul class="hours" id="hours">
+            <li data-day="1"><span class="d">Lundi</span><span class="h">Fermé</span></li>
+            <li data-day="2"><span class="d">Mardi</span><span class="h">10h00 – 18h30</span></li>
+            <li data-day="3"><span class="d">Mercredi</span><span class="h">10h00 – 18h30</span></li>
+            <li data-day="4"><span class="d">Jeudi</span><span class="h">10h00 – 18h30</span></li>
+            <li data-day="5"><span class="d">Vendredi</span><span class="h">10h00 – 18h30</span></li>
+            <li data-day="6"><span class="d">Samedi</span><span class="h">10h00 – 18h30</span></li>
+            <li data-day="0"><span class="d">Dimanche</span><span class="h">14h00 – 18h00</span></li>
+          </ul>
+          <p class="note" style="font-size:.8rem;color:var(--ink-soft);margin-top:1rem">Horaires indicatifs, susceptibles d’évoluer selon la saison. Vérifiez sur le site du réseau avant votre visite.</p>
+        </div>
+
+        <div class="card reveal d2">
+          <div class="info-block">
+            <div class="k">Adresse</div>
+            <div class="v">5 rue Chalucet<br>83000 Toulon</div>
+            <div class="s">Quartier de la Créativité et de la Connaissance, face au jardin Alexandre&nbsp;1<sup>er</sup>.</div>
+          </div>
+          <div class="info-block">
+            <div class="k">Téléphone</div>
+            <div class="v"><a href="tel:+33494368178">04 94 36 81 78</a><br><a href="tel:+33494368200">04 94 36 82 00</a></div>
+          </div>
+          <div class="info-block">
+            <div class="k">Courriel</div>
+            <div class="v" style="font-size:1rem;word-break:break-word"><a href="mailto:bibliothequesetmediatheques@mairie-toulon.fr">bibliothequesetmediatheques@mairie-toulon.fr</a></div>
+          </div>
+          <div class="info-block">
+            <div class="k">En bus</div>
+            <div class="s" style="margin-top:0">Lignes 1, 2, 6, 10, 11, 18, 20, 36A, 36B, 40 et 191 — arrêt <strong>Peri / Obs</strong>.</div>
+          </div>
+          <div class="actions">
+            <a class="btn" href="https://www.openstreetmap.org/?mlat=43.127052&mlon=5.927204#map=18/43.127052/5.927204" target="_blank" rel="noopener">Voir sur la carte <span class="arrow">→</span></a>
+            <a class="btn" href="https://mediatheques.toulon.fr/" target="_blank" rel="noopener">Le réseau <span class="arrow">↗</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="foot-top">
+    <div>
+      <div class="foot-brand">Médiathèque Chalucet<span>Toulon · Réseau des médiathèques</span></div>
+    </div>
+    <div class="foot-links">
+      <div>
+        <span class="t">Explorer</span>
+        <a href="#lieu">Le lieu</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#espaces">Les espaces</a>
+        <a href="#pratique">Informations pratiques</a>
+      </div>
+      <div>
+        <span class="t">Ailleurs</span>
+        <a href="https://mediatheques.toulon.fr/" target="_blank" rel="noopener">Site des médiathèques</a>
+        <a href="https://www.toulon.fr/" target="_blank" rel="noopener">Ville de Toulon</a>
+        <a href="https://quartier-chalucet.fr/" target="_blank" rel="noopener">Quartier Chalucet</a>
+      </div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <p class="credits">Page de présentation non officielle, réalisée à partir d’informations publiques. Photographies : © Lisa Ricciotti, © D. Huguenin / Vezzoni &amp; Associés, Enssib, Infociments.</p>
+    <p>© <span id="year">2026</span> · Fait avec soin à Toulon</p>
+  </div>
+</footer>
+
+<button class="top" id="toTop" aria-label="Revenir en haut">↑</button>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* nav state + progress */
+  var nav = document.getElementById("nav"),
+      bar = document.getElementById("progress"),
+      heroBg = document.getElementById("heroBg"),
+      toTop = document.getElementById("toTop");
+
+  function onScroll(){
+    var y = window.scrollY || document.documentElement.scrollTop;
+    nav.classList.toggle("solid", y > window.innerHeight * 0.75);
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (max > 0 ? (y / max) * 100 : 0) + "%";
+    toTop.classList.toggle("show", y > 900);
+    if(!reduce && y < window.innerHeight){
+      heroBg.style.transform = "translate3d(0," + (y * 0.16) + "px,0) scale(1.02)";
+    }
+  }
+  window.addEventListener("scroll", onScroll, {passive:true});
+  onScroll();
+
+  toTop.addEventListener("click", function(){
+    window.scrollTo({top:0, behavior: reduce ? "auto" : "smooth"});
+  });
+
+  /* mobile menu */
+  var toggle = document.getElementById("navToggle"), menu = document.getElementById("menu");
+  toggle.addEventListener("click", function(){
+    var open = menu.classList.toggle("open");
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  menu.addEventListener("click", function(e){
+    if(e.target.closest("a")){ menu.classList.remove("open"); toggle.setAttribute("aria-expanded","false"); }
+  });
+
+  /* reveal */
+  var revs = document.querySelectorAll(".reveal");
+  if("IntersectionObserver" in window && !reduce){
+    var ro = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add("in"); ro.unobserve(en.target); }
+      });
+    }, {threshold:0.14, rootMargin:"0px 0px -8% 0px"});
+    revs.forEach(function(el){ ro.observe(el); });
+    /* filet de sécurité : rien ne reste invisible */
+    setTimeout(function(){ revs.forEach(function(el){ el.classList.add("in"); }); }, 3500);
+  } else {
+    revs.forEach(function(el){ el.classList.add("in"); });
+  }
+
+  /* active nav link */
+  var links = Array.prototype.slice.call(document.querySelectorAll(".nav a.lnk"));
+  var sections = links.map(function(a){ return document.querySelector(a.getAttribute("href")); }).filter(Boolean);
+  if("IntersectionObserver" in window){
+    var so = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          links.forEach(function(a){ a.classList.toggle("active", a.getAttribute("href") === "#" + en.target.id); });
+        }
+      });
+    }, {rootMargin:"-45% 0px -50% 0px"});
+    sections.forEach(function(s){ so.observe(s); });
+  }
+
+  /* counters */
+  var counts = document.querySelectorAll(".count");
+  function animate(el){
+    var to = parseInt(el.dataset.to, 10),
+        sep = el.dataset.sep || "",
+        start = null, dur = 1500;
+    if(reduce){ el.textContent = to.toLocaleString("fr-FR"); return; }
+    function step(ts){
+      if(!start) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      var val = Math.round(to * eased);
+      el.textContent = sep ? val.toLocaleString("fr-FR") : String(val);
+      if(p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  if("IntersectionObserver" in window){
+    var co = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ animate(en.target); co.unobserve(en.target); } });
+    }, {threshold:0.6});
+    counts.forEach(function(c){ co.observe(c); });
+  } else { counts.forEach(animate); }
+
+  /* tabs */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll(".tab")),
+      panels = Array.prototype.slice.call(document.querySelectorAll(".panel"));
+  function select(i){
+    tabs.forEach(function(t, j){ t.setAttribute("aria-selected", j === i ? "true" : "false"); });
+    panels.forEach(function(p, j){ p.classList.toggle("on", j === i); });
+  }
+  tabs.forEach(function(t, i){
+    t.addEventListener("click", function(){ select(i); });
+    t.addEventListener("keydown", function(e){
+      var k = e.key, n = null;
+      if(k === "ArrowRight") n = (i + 1) % tabs.length;
+      if(k === "ArrowLeft") n = (i - 1 + tabs.length) % tabs.length;
+      if(n !== null){ e.preventDefault(); tabs[n].focus(); select(n); }
+    });
+  });
+
+  /* today */
+  var today = new Date().getDay();
+  var row = document.querySelector('#hours li[data-day="' + today + '"]');
+  if(row){
+    row.classList.add("today");
+    if(today === 1) row.classList.add("closed");
+  }
+  document.getElementById("year").textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
