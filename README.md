@@ -20,5 +20,6 @@ Puis http://localhost:8000
 
 ## Crédits
 
+Design & direction artistique : **Laurent Pinson**.
 Photographies : © Lisa Ricciotti, © D. Huguenin / Vezzoni & Associés, Enssib, Infociments.
 Page de présentation non officielle, réalisée à partir d'informations publiques.
