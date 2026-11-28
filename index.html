@@ -10,7 +10,7 @@
 <script>document.documentElement.classList.add('js');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter:wght@300;400;500;600&family=Archivo:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --paper:#f6f2ea;
@@ -379,6 +379,145 @@
     .js .reveal{opacity:1;transform:none}
     .hero .bg{transform:none!important}
   }
+
+  /* ==========================================================
+     SÉLECTEUR DE DESIGN (3 propositions)
+     ========================================================== */
+  .designbar{
+    position:fixed;left:1rem;bottom:1rem;z-index:96;
+    display:flex;align-items:center;gap:.25rem;
+    background:rgba(20,19,16,.92);color:#f6f2ea;
+    padding:.35rem;border-radius:999px;
+    -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+    box-shadow:0 12px 34px rgba(0,0,0,.28);
+    font-family:"Inter",sans-serif;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase
+  }
+  .designbar .dl{
+    padding:0 .65rem 0 .55rem;opacity:.55;font-size:.58rem;letter-spacing:.18em;white-space:nowrap
+  }
+  .designbar button{
+    display:flex;align-items:center;gap:.4rem;background:none;border:0;color:inherit;
+    font:inherit;letter-spacing:.08em;text-transform:uppercase;
+    padding:.5rem .8rem;border-radius:999px;cursor:pointer;opacity:.82;
+    transition:background .3s,color .3s,opacity .3s
+  }
+  .designbar button b{font-weight:600;font-size:.58rem;opacity:.65}
+  .designbar button:hover{opacity:1}
+  .designbar button[aria-pressed="true"]{background:#f6f2ea;color:#191814;opacity:1}
+  .designbar button[aria-pressed="true"] b{opacity:.5}
+
+  /* ---------- VARIANTE B · MÉDITERRANÉE ---------- */
+  body[data-design="b"]{
+    --paper:#f4ecdf;--paper-2:#eadcc4;--ink:#0d1a3c;--ink-soft:#3d4869;
+    --terra:#1f45c9;--terra-soft:#4a6ee0;--olive:#0f6b5c;--gold:#dfa23a;
+    --line:rgba(13,26,60,.16);
+    --serif:"Archivo",system-ui,sans-serif;--sans:"Archivo",system-ui,sans-serif;
+    font-family:"Archivo",system-ui,sans-serif
+  }
+  body[data-design="b"] h1,body[data-design="b"] h2{font-weight:700;letter-spacing:-.035em;text-transform:uppercase;line-height:.95}
+  body[data-design="b"] h1 em,body[data-design="b"] h2 em{font-style:normal;color:var(--terra)}
+  body[data-design="b"] .hero h1 em{color:#e9b65f}
+  body[data-design="b"] .hero h1{font-size:clamp(2.9rem,9vw,7.4rem)}
+  body[data-design="b"] .hero::after{
+    background:
+      linear-gradient(180deg,rgba(6,14,42,.68) 0%,rgba(6,14,42,.12) 40%,rgba(6,14,42,.78) 100%),
+      linear-gradient(90deg,rgba(8,20,66,.88) 0%,rgba(10,24,74,.55) 45%,rgba(10,24,74,.05) 80%)
+  }
+  body[data-design="b"] .nav.solid{background:rgba(255,255,255,.94)}
+  body[data-design="b"] .nav a.lnk::after{background:var(--terra)}
+  body[data-design="b"] .label{color:var(--terra)}
+  body[data-design="b"] .eyebrow{color:#fff}
+  body[data-design="b"] .btn{background:var(--terra);border-color:var(--terra);color:#fff}
+  body[data-design="b"] .btn:hover{background:var(--ink);border-color:var(--ink);color:#fff}
+  body[data-design="b"] .intro-media .frame,
+  body[data-design="b"] .panel .pic,
+  body[data-design="b"] .gal-grid figure{border-radius:18px}
+  body[data-design="b"] .intro-media .cap{background:var(--paper);right:14px;bottom:14px;border-radius:100px;padding:.7rem 1rem}
+  body[data-design="b"] .intro-quote{border-left-color:var(--terra);font-style:normal;font-weight:500}
+  body[data-design="b"] .stats{background:var(--terra);border:0;color:#fff}
+  body[data-design="b"] .stat{border-left-color:rgba(255,255,255,.28)}
+  body[data-design="b"] .stat .lbl{color:rgba(255,255,255,.78)}
+  body[data-design="b"] .stat .num small{color:rgba(255,255,255,.7)}
+  body[data-design="b"] .arch{background:#0b1733}
+  body[data-design="b"] .arch .label{color:var(--gold)}
+  body[data-design="b"] .arch h2 em{color:var(--gold)}
+  body[data-design="b"] .stamp{background:var(--gold);color:#0b1733}
+  body[data-design="b"] .tab[aria-selected="true"]{background:var(--terra);border-color:var(--terra)}
+  body[data-design="b"] .chips li{background:rgba(31,69,201,.09);color:var(--ink)}
+  body[data-design="b"] .card{border:0;border-radius:22px;box-shadow:0 26px 60px rgba(13,26,60,.10);background:#fffdf8}
+  body[data-design="b"] .hours li.today{background:rgba(31,69,201,.09);box-shadow:inset 2px 0 0 var(--terra)}
+  body[data-design="b"] footer.site{background:#0b1733}
+  body[data-design="b"] .drop::first-letter{color:var(--terra);font-family:"Archivo",sans-serif;font-weight:700}
+
+  /* ---------- VARIANTE C · GALERIE ---------- */
+  body[data-design="c"]{
+    --paper:#fbfbf9;--paper-2:#f1f1ec;--ink:#111110;--ink-soft:#5f5f58;
+    --terra:#a83a2a;--terra-soft:#c05747;--olive:#4a4a44;--gold:#b9b5a8;
+    --line:rgba(17,17,16,.16);
+    --serif:"Space Grotesk",system-ui,sans-serif;--sans:"Inter",system-ui,sans-serif
+  }
+  body[data-design="c"] h1,body[data-design="c"] h2{font-weight:500;letter-spacing:-.035em}
+  body[data-design="c"] h2 em{font-style:normal;color:var(--terra)}
+  body[data-design="c"] .hero{
+    display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;
+    min-height:auto;padding-top:6.6rem;background:var(--paper);color:var(--ink)
+  }
+  body[data-design="c"] .hero::after{display:none}
+  body[data-design="c"] .hero .bg{
+    order:2;position:relative;inset:auto;height:56vh;margin:2.2rem var(--pad) 0;
+    background-position:center 60%
+  }
+  body[data-design="c"] .hero-inner{order:1;padding:0 var(--pad)}
+  body[data-design="c"] .hero h1{
+    font-size:clamp(2.2rem,6.6vw,5.8rem);text-transform:uppercase;letter-spacing:-.045em;line-height:.94
+  }
+  body[data-design="c"] .hero h1 em{font-style:normal;color:var(--ink)}
+  body[data-design="c"] .eyebrow{color:var(--ink-soft)}
+  body[data-design="c"] .hero .lede{color:var(--ink-soft);max-width:52ch}
+  body[data-design="c"] .hero-foot{border-top:1px solid var(--line)}
+  body[data-design="c"] .hero-foot .tag,body[data-design="c"] .scroll-cue{color:var(--ink-soft)}
+  body[data-design="c"] .scroll-cue i{background:var(--line)}
+  body[data-design="c"] .scroll-cue i::after{background:var(--ink)}
+  body[data-design="c"] .nav{background:rgba(251,251,249,.9);color:var(--ink)}
+  body[data-design="c"] .nav.solid{background:rgba(251,251,249,.96)}
+  body[data-design="c"] .label{color:var(--ink-soft)}
+  body[data-design="c"] .btn{border-radius:0;border:1px solid var(--ink)}
+  body[data-design="c"] .btn:hover{background:var(--ink);color:var(--paper)}
+  body[data-design="c"] .intro-media .frame,
+  body[data-design="c"] .panel .pic,
+  body[data-design="c"] .gal-grid figure,
+  body[data-design="c"] .card,
+  body[data-design="c"] .tab,
+  body[data-design="c"] .chips li,
+  body[data-design="c"] .stamp,
+  body[data-design="c"] .top{border-radius:0}
+  body[data-design="c"] .intro-media .cap{right:auto;left:0;bottom:0;background:var(--paper);padding:.7rem .9rem}
+  body[data-design="c"] .intro-quote{border-left-color:var(--ink);font-style:normal}
+  body[data-design="c"] .stats{background:var(--paper);border-top:1px solid var(--ink);border-bottom:1px solid var(--line)}
+  body[data-design="c"] .arch .label{color:rgba(255,255,255,.55)}
+  body[data-design="c"] .arch h2 em{color:#fff}
+  body[data-design="c"] .panel .pic{aspect-ratio:4/3}
+  body[data-design="c"] .tab{border:1px solid var(--line);background:transparent}
+  body[data-design="c"] .tab[aria-selected="true"]{background:var(--ink);border-color:var(--ink)}
+  body[data-design="c"] .chips li{background:transparent;border:1px solid var(--line);color:var(--ink-soft)}
+  body[data-design="c"] .card{background:#fff;box-shadow:none}
+  body[data-design="c"] .stamp{background:var(--ink);color:#fff;left:0;bottom:0}
+  body[data-design="c"] .hours li.today{background:#fff;box-shadow:inset 2px 0 0 var(--ink)}
+  body[data-design="c"] .hours li.today .d::after{color:var(--ink-soft)}
+  body[data-design="c"] .gal-grid img{filter:grayscale(1);transition:filter .8s var(--ease),transform 1.6s var(--ease)}
+  body[data-design="c"] .gal-grid figure:hover img{filter:grayscale(0)}
+  body[data-design="c"] .drop::first-letter{color:var(--ink);font-family:"Space Grotesk",sans-serif}
+  body[data-design="c"] footer.site{background:#111110}
+  body[data-design="c"] .foot-brand{font-family:"Space Grotesk",sans-serif;font-weight:500}
+
+  @media(max-width:760px){
+    .designbar{left:.6rem;bottom:.6rem;gap:0;padding:.28rem}
+    .designbar .dl{display:none}
+    .designbar button{padding:.5rem .62rem;font-size:.58rem}
+    .designbar button span{display:none}
+    body[data-design="c"] .hero{padding-top:5.6rem}
+    body[data-design="c"] .hero .bg{height:44vh;margin:1.6rem var(--pad) 0}
+  }
 </style>
 </head>
 <body>
@@ -664,6 +803,13 @@
 
 <button class="top" id="toTop" aria-label="Revenir en haut">↑</button>
 
+<div class="designbar" id="designbar" role="group" aria-label="Choisir une proposition de design">
+  <span class="dl">Design</span>
+  <button type="button" data-design="a" aria-pressed="true"><b>01</b><span>Éditorial</span></button>
+  <button type="button" data-design="b" aria-pressed="false"><b>02</b><span>Méditerranée</span></button>
+  <button type="button" data-design="c" aria-pressed="false"><b>03</b><span>Galerie</span></button>
+</div>
+
 <script>
 (function(){
   "use strict";
@@ -681,7 +827,7 @@
     var max = document.documentElement.scrollHeight - window.innerHeight;
     bar.style.width = (max > 0 ? (y / max) * 100 : 0) + "%";
     toTop.classList.toggle("show", y > 900);
-    if(!reduce && y < window.innerHeight){
+    if(!reduce && document.body.getAttribute("data-design") !== "c" && y < window.innerHeight){
       heroBg.style.transform = "translate3d(0," + (y * 0.16) + "px,0) scale(1.02)";
     }
   }
@@ -780,6 +926,50 @@
     if(today === 1) row.classList.add("closed");
   }
   document.getElementById("year").textContent = new Date().getFullYear();
+})();
+</script>
+
+<script>
+(function(){
+  "use strict";
+  var keys = ["a","b","c"],
+      bar = document.getElementById("designbar"),
+      btns = Array.prototype.slice.call(bar.querySelectorAll("button")),
+      heroBg = document.getElementById("heroBg");
+
+  function apply(k, persist){
+    if(keys.indexOf(k) < 0) k = "a";
+    document.body.setAttribute("data-design", k);
+    btns.forEach(function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-design") === k ? "true" : "false"); });
+    if(k === "c" && heroBg){ heroBg.style.transform = ""; }
+    if(persist !== false){
+      try { localStorage.setItem("chalucet-design", k); } catch(e){}
+      try {
+        var u = new URL(window.location.href);
+        u.searchParams.set("design", k);
+        history.replaceState(null, "", u);
+      } catch(e){}
+    }
+    window.dispatchEvent(new Event("scroll"));
+  }
+
+  btns.forEach(function(b){
+    b.addEventListener("click", function(){ apply(b.getAttribute("data-design")); });
+  });
+
+  var q = null, saved = null;
+  try { q = new URLSearchParams(window.location.search).get("design"); } catch(e){}
+  try { saved = localStorage.getItem("chalucet-design"); } catch(e){}
+  apply(q || saved || "a", false);
+
+  /* raccourcis clavier 1 / 2 / 3 pendant la présentation */
+  document.addEventListener("keydown", function(e){
+    if(e.metaKey || e.ctrlKey || e.altKey) return;
+    var t = e.target;
+    if(t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
+    var i = ["1","2","3"].indexOf(e.key);
+    if(i > -1) apply(keys[i]);
+  });
 })();
 </script>
 </body>
